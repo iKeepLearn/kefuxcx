@@ -1,0 +1,32 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">客服</view>
+</cu-custom>
+<view class="margin-xl padding-xl bg-white radius shadow shadow-lg" wx:if="{{!userInfo}}">
+  <view class="flex justify-center">
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 点击聊天</button>
+  </view>
+</view>
+
+<view wx:else>
+  <view class="text-center">
+    <text class="text-gray " hidden="{{hasMsg}}">暂时还没有消息哦...</text>
+  </view>
+  <view class="chat-block" wx:for="{{msg}}" wx:key>
+    <view class="chat-card" bindtap="goChat" data-id="{{item.customerOpenId}}">
+      <!-- <image class="chat-image" mode="widthFix" src="{{user[item.customerOpenId].avatarUrl}}"></image> -->
+      <image class="chat-image" mode="widthFix" src="{{item.avatarUrl}}"></image>
+      <view class="chat-info">
+        <!-- <view class="chat-name">{{user[item.customerOpenId].nickName}}</view> -->
+        <view class="chat-name">{{item.nickName}}</view>
+        <view class="  chat-text text-gray ">
+          <text class="text-cut">{{item.value}}</text>
+        </view>
+      </view>
+      <view class="chat-opr">
+        <view class="chat-count text-gray">{{item.createTime}}</view>
+      </view>
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,5 @@
+function second(num){
+  return num/1000
+}
+
+module.exports.second = second

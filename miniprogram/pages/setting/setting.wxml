@@ -1,0 +1,51 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">客服</view>
+</cu-custom>
+
+<view class="chat-card bg-white">
+<view class="padding-left-lg text-gray" wx:if="{{!userInfo}}"><text>下拉刷新获取头像和昵称</text></view>
+ <block wx:else>
+  <image class="chat-image" mode="widthFix" src="{{userInfo.avatarUrl}}"></image>
+  <view class="chat-info">
+      <view class="chat-name">{{userInfo.nickName}}</view>
+      <view class="  chat-text text-gray ">
+        <text class="text-cut">商城客服</text>
+      </view>
+  </view>
+   </block>
+</view>
+
+<view class="cu-list menu margin-top-xl margin-bottom-xl">
+  <view class="cu-item arrow">
+    <view class="content" bindtap='manageStore'>
+      <text class="text-grey">店铺设置</text>
+    </view>
+  </view>
+
+  <view class="cu-item arrow">
+    <view class="content" bindtap='manageReply'>
+      <text class="text-grey">编辑快捷回复</text>
+    </view>
+  </view>
+
+  <view class="cu-item arrow">
+    <view class="content" bindtap='manageAdmin'>
+      <text class="text-grey">客服人员</text>
+    </view>
+  </view>
+
+  <view class="cu-item arrow">
+    <view class="content" bindtap='removeInvalidFormId'>
+      <text class="text-grey">清理过期FormId</text>
+    </view>
+  </view>
+
+</view>
+
+<form report-submit="true" bindsubmit="addFormId">
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-green lg" form-type="submit" disabled="{{buttonDisabled}}">点击生成通知FormId</button>
+</view>
+</form>
+
+<view class="note text-red content text-center" style="width:90%">还可接收{{formIdCount}}条服务通知</view>

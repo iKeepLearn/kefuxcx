@@ -1,0 +1,10 @@
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+
+.align-right{
+  float: right;
+}
+.btn{
+  margin-top:20rpx;
+  width: 600rpx;
+}

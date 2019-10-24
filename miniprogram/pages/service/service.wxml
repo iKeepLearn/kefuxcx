@@ -1,0 +1,68 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="true">
+  <view slot="content">客服</view>
+</cu-custom>
+
+<radio-group bindchange="changeService">
+  <block wx:for="{{service}}" wx:key>
+    <view class="chat-card bg-white">
+      <view class="chat-del text-center" bindtap="deleteservice" data-docid="{{item._id}}" data-openid="{{item.openid}}">
+        <text class="cuIcon-move text-red"></text>
+      </view>
+      <image class="chat-image" mode="widthFix" src="{{user[item.openid].avatarUrl}}"></image>
+      <view class="chat-info">
+        <view class="chat-name">{{user[item.openid].nickName}}</view>
+        <view class="  chat-text text-gray ">
+          <text class="text-cut">商城客服</text>
+        </view>
+      </view>
+      <view class="chat-opr">
+
+        <view class="checkbox">
+          <label >
+            <radio value="{{item.openid}}" checked="{{item.openid==store.admin}}" />
+            <text class="text-center">接收消息提醒</text>
+          </label>
+        </view>
+      </view>
+
+    </view>
+  </block>
+</radio-group>
+
+<button class="btn margin-top" type="primary" bindtap="change">添加客服人员</button>
+
+<view class="cu-modal {{modalName=='service'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end solid-bottom">
+      <view class="content">添加客服人员</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+
+    <view class="cu-list menu">
+      <block wx:for="{{user}}" wx:key>
+        <view class="user-card bg-white">
+          <image class="user-image" mode="widthFix" src="{{item.avatarUrl}}"></image>
+          <view class="user-info">
+            <view class="chat-name">{{item.nickName}}</view>
+            <view class="  chat-text text-gray ">
+              <text class="text-sm">{{item.gender?'男':'女'}}</text>
+            </view>
+          </view>
+          <view class="user-opr">
+          <view class="  chat-text">
+          <!-- <text class="cuIcon-roundadd text-gray"></text> -->
+          <!-- <text >{{kefu.iservice(item.openid,service)}}</text> -->
+          <text class="cuIcon-roundcheckfill text-green" wx:if="{{item.service}}"></text>
+          <text class="cuIcon-roundadd text-gray" bindtap="addService" data-id="{{item.openid}}" wx:else></text>
+          </view>
+          </view>
+
+        </view>
+      </block>
+
+    </view>
+
+  </view>
+</view>

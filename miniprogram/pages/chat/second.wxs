@@ -1,0 +1,15 @@
+var transform = function(duration) {
+  var time = parseFloat(duration) / 1000;
+
+  var seconds = parseInt((duration / 1000) % 60)
+  var minutes = parseInt((duration / (1000 * 60)) % 60)
+  if (time > 60 && time < 60 * 60 * 60) {
+    time = minutes + "'" + seconds + '"';
+  } else {
+    time = seconds + '"';
+  }
+
+  return time;
+}
+
+module.exports.transform = transform

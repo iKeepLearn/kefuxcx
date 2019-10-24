@@ -1,0 +1,50 @@
+page {
+  padding-bottom: 210rpx;
+}
+
+.main {
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+.mall-bar {
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.textArea {
+  font-size: 22px;
+  line-height: 2;
+  vertical-align: bottom;
+}
+
+.sound-btn {
+  width: 100%;
+}
+
+.solid-left::after {
+  border-left: 1rpx solid rgba(0, 0, 0, 0.8);
+}
+
+.solid-top::after {
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.8);
+}
+
+.margin-first {
+  margin-left: 70rpx;
+}
+
+.action text {
+  height: 80%;
+}
+
+.chatfoot {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 1024;
+}
+
+.solid-bottom::after {
+  border-bottom: 1rpx solid #ddd;
+}

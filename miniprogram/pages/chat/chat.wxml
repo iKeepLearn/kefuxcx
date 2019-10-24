@@ -1,0 +1,104 @@
+<cu-custom bgColor="bg-gradual-blue" isCustom="{{admin}}">
+  <view slot="content">客服</view>
+</cu-custom>
+
+<view class="margin-xl padding-xl bg-white radius shadow shadow-lg" wx:if="{{!userInfo}}">
+  <view class="flex justify-center">
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 点击聊天</button>
+  </view>
+</view>
+
+<view wx:else>
+
+  <view class="cu-chat">
+    <scroll-view scroll-y='true' scroll-into-view="{{scrollBottom}}" style="height: 1300rpx;">
+      <block wx:for="{{msg}}" wx:key>
+        <view class="cu-item {{item.openid==currentOpenId?'self':''}}">
+          <view class="cu-avatar radius" style="background-image:url({{item.avatarUrl}});" wx:if="{{item.openid!=currentOpenId}}"></view>
+          <view class="main" bindtap="handleTap" data-msg="{{item}}">
+            <block wx:if="{{item.type==1}}">
+              <view class="content {{item.openid==currentOpenId?'bg-green':''}} shadow">
+                <text style="font-size:20px;">{{item.value}}</text>
+              </view>
+            </block>
+
+            <block wx:if="{{item.type==2}}">
+              <image src="{{item.value}}" class="radius" mode="widthFix"></image>
+            </block>
+
+            <block wx:if="{{item.type==3}}">
+
+              <view class="content shadow text-lg " bindtap="playAudio" data-src="{{item.value}}">
+                <text class="cuIcon-sound padding-right-xl" style="font-size: 26px;"> </text>
+                <view class="action text-sm text-bold text-grey">
+                  {{second.transform(item.duration)}}
+                </view>
+              </view>
+            </block>
+
+          </view>
+          <view class="cu-avatar radius" style="background-image:url({{item.avatarUrl}});" wx:if="{{item.openid==currentOpenId}}"></view>
+          <view class="date">{{item.createTime}}</view>
+        </view>
+
+      </block>
+      <view id="{{scrollBottom}}"></view>
+
+    </scroll-view>
+  </view>
+
+  <view class="chatfoot" style="bottom:{{InputBottom}}px">
+   
+    <form report-submit="true" bindsubmit="sendMsgText">
+      <view class="cu-bar input {{InputBottom!=0?'cur':''}} solid-top">
+        <view class="action" bindtap="inputMethod">
+          <text class="cuIcon-sound text-grey" wx:if="{{!sound}}"></text>
+          <text class="cuIcon-keyboard text-grey" wx:else></text>
+        </view>
+        <textarea name="msgText" value="{{msgText}}" class="solid-bottom textArea" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" fixed="true" cursor-spacing="10" wx:if="{{!sound}}"  auto-height="true"
+          style="height:64rpx;width:460rpx"></textarea>
+
+        <view class="action">
+          <text class="cuIcon-pic text-grey" wx:if="{{!sound}}" bindtap="selectPic"></text>
+        </view>
+        <button class="cu-btn bg-green shadow" form-type="submit" wx:if="{{!sound}}">发送</button>
+        <block wx:else>
+          <button class="sound-btn bg-white" bindtouchstart="startRecord" bindtouchend="endRecord">按住说话</button>
+          <view class="action">
+            <text class="cuIcon-pic text-grey" bindtap="selectPic"></text>
+          </view>
+        </block>
+      </view>
+    </form>
+  </view>
+
+  <wxs src="./second.wxs" module="second" />
+
+</view>
+
+<view class="cu-modal {{modalName=='reply'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end solid-bottom">
+      <view class="content">快捷回复</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    
+      <view class="cu-list menu">
+      <block wx:for="{{reply}}" wx:key>
+        <view class="cu-item arrow">
+          <view class="content" bindtap='reply' data-text="{{item.text}}">
+            <text class="text-grey">{{item.text}}</text>
+          </view>
+        </view>
+          </block>
+          <view class="cu-item arrow">
+          <view class="content" bindtap='goReply' >
+            <text class="text-grey">管理快捷回复</text>
+          </view>
+        </view>
+      </view>
+  
+  </view>
+</view>

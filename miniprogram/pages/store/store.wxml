@@ -1,0 +1,35 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="true">
+  <view slot="content">店铺设置</view>
+</cu-custom>
+
+<form report-submit="true" bindsubmit="updateStore">
+  <view class="cu-form-group ">
+    <view class="title">店铺名称
+      <text class="text-red">*</text>：</view>
+    <input name="name" value="{{store.name}}" bindblur="changeName"  focus="{{isChange}}" disabled="{{!isChange}}"></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class="title">联系电话
+      <text class="text-red">*</text>：</view>
+    <input name="tel" type="number" value="{{store.tel}}" bindblur="changeTel" maxlength="11" disabled="{{!isChange}}"></input>
+  </view>
+
+
+  <view class="cu-form-group ">
+    <view class="title">店铺地址：</view>
+    <input class="text-cut" name="address" value="{{store.address}}" bindblur="changeAddress" disabled="{{!chooseAdd}}"></input>
+    <view class=" mapiconwidth" bindtap="mapLocation">
+      <view class="cuIcon-locationfill text-gray lg" bindtap="mapLocation">定位</view>
+    </view>
+  </view>
+
+
+
+
+  
+  <button class="btn" type="primary" bindtap="change" hidden="{{isChange}}">修改店铺信息</button>
+  <button class="btn" form-type="submit" hidden="{{!isChange}}">确认修改</button>
+  <button class="btn  bg-pink" bindtap="cancel" hidden="{{!isChange}}">取消修改</button>
+</form>
+

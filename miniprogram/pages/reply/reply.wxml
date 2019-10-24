@@ -1,0 +1,26 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="true">
+  <view slot="content">编辑快捷回复</view>
+</cu-custom>
+
+<view class="cu-list menu margin-bottom-xl">
+
+  <view class="cu-item " wx:for="{{reply}}" wx:key>
+    <view class="content">
+      <text class="cuIcon-move text-red" bindtap="deleteReply" data-id="{{item._id}}" wx:if="{{edit[index]}}"></text>
+      <text class="text-grey" bindtap="goEdit" data-id="{{item._id}}" data-index="{{index}}" data-module="edit" hidden="{{!edit[index]}}">{{item.text}}</text>
+      <input  data-module="edit" data-id="{{item._id}}" data-index="{{index}}" value="{{item.text}}" hidden="{{edit[index]}}" bindblur="editReply"></input>
+    </view>
+  </view>
+
+  <view class="cu-item ">
+    <view class="content" bindtap="goAdd">
+      <text class="cuIcon-roundadd text-blue" wx:if="{{!add}}"></text>
+      <text class="text-blue" wx:if="{{!add}}">添加快捷回复</text>
+    </view>
+    <input  style="width:100%;" 
+   focus="true" placeholder="请输入快捷回复" value="" hidden="{{!add}}" bindblur="addReply"></input>
+  </view>
+</view>
+<view class="text-center">
+  <text class="text-gray ">最多添加10条</text>
+</view>
